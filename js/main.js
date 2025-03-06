@@ -17,4 +17,5 @@ Promise.all(promises)
 
 function initMainPage(dataArray) {
     innovativeVis = new InnovativeVis("innovative-div", dataArray[1]);
+    vis1 = new Vis1("bar-chart", dataArray[0]);
 }

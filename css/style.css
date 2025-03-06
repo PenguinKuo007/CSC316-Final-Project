@@ -76,3 +76,34 @@
     stroke-width: 4px;
 
 }
+
+body {
+    font-family:  Georgia, serif;
+
+}
+.x-axis .domain {
+    display: none;
+}
+.x-axis {
+    font-size: 15px;
+}
+.bar-text {
+    font-size: 10px;
+    fill: darkgrey;
+}
+
+.section {
+    padding: 40px 0;
+}
+.message {
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+.row{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
