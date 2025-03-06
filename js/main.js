@@ -1,5 +1,5 @@
 // Initialize global variables
-// let innovativeVis;
+let innovativeVis;
 
 // Load data using promises
 let promises = [
@@ -16,5 +16,5 @@ Promise.all(promises)
     });
 
 function initMainPage(dataArray) {
-    // innovativeVis = new InnovativeVis("innovative-div", dataArray[1]);
+    innovativeVis = new InnovativeVis("innovative-div", dataArray[1]);
 }
