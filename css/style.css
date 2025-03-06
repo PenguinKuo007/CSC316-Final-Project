@@ -81,13 +81,13 @@ body {
     font-family:  Georgia, serif;
 
 }
-.x-axis .domain {
+#vis1 .x-axis .domain {
     display: none;
 }
-.x-axis {
+#vis1 .x-axis {
     font-size: 15px;
 }
-.bar-text {
+#vis1.bar-text {
     font-size: 10px;
     fill: darkgrey;
 }
