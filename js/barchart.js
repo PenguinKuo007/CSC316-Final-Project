@@ -164,8 +164,8 @@ class BarChart {
         .append("rect")
         .attr("class", "bar")
         .attr("x", (d) => vis.xScale(d.secondHand))
-        .attr("width", vis.xScale.bandwidth())
         .attr("y", vis.height)
+        .attr("width", vis.xScale.bandwidth())
         .attr("height", 0)  // This is suggested by ChatGPT so that there is a somooth animation.
         .attr("fill", (d) => vis.color(d.secondHand))
         .merge(bars)
