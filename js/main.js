@@ -18,4 +18,6 @@ Promise.all(promises)
 function initMainPage(dataArray) {
     innovativeVis = new InnovativeVis("innovative-div", dataArray[1]);
     vis1 = new Vis1("vis1", dataArray[0]);
+    chart = new BarChart("barchart-secondhand",  dataArray[1]);
+
 }
