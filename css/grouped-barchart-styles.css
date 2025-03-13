@@ -14,6 +14,7 @@
 
 #grouped-barchart-div text {
     font-size: 0.75rem;
+    color: black;
 }
 
 #grouped-barchart-div .axis path,
@@ -26,9 +27,19 @@
     stroke-width: 2px;
 }
 
-#grouped-barchart-div .legend text {
+#grouped-barchart-div .label {
+    text-anchor: middle;
     font-size: 0.875rem;
-    color: black;
+    font-weight: 600;
+}
+
+#grouped-barchart-div .legend-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+#grouped-barchart-div .legend-label {
+    font-size: 0.875rem;
 }
 
 #grouped-barchart-tooltip {

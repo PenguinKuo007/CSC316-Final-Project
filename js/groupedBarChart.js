@@ -18,7 +18,7 @@ class GroupedBarChart {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 150, bottom: 30, left: 50};
+        vis.margin = {top: 20, right: 160, bottom: 60, left: 85};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -61,15 +61,29 @@ class GroupedBarChart {
 
         vis.svg.append("g")
             .attr("class", "y-axis axis");
+
+        vis.svg.append("text") // x-axis label
+            .attr("class", "label")
+            .attr("x", vis.width / 2)
+            .attr("y", vis.height + 40)
+            .text("Lung Cancer Stage");
+
+        vis.svg.append("text") // y-axis label
+            .attr("class", "label")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -vis.width / 2)
+            .attr("y", -60)
+            .text("Number of Patients");
         
         
         // Create legend
         vis.legend = d3.select(`#${vis.parentElement}`).select("svg")
             .append("g")
             .attr("class", "legend")
-            .attr("transform", `translate(${vis.width + 80}, 20)`);
+            .attr("transform", `translate(${vis.width + 110}, 30)`);
         
         vis.legend.append("text")
+            .attr("class", "legend-title")
             .text("Smoking Status");
         
 
@@ -98,6 +112,7 @@ class GroupedBarChart {
 
 
         vis.displayData = [];
+        // Filter smoking status to display, if necessary
         vis.displayStatuses = vis.smokingStatuses.filter(d => vis.filterStatus == "" || d == vis.filterStatus);
 
         // Set up display data in the correct order
@@ -134,7 +149,6 @@ class GroupedBarChart {
         vis.bars.exit()
             .transition()
             .duration(800)
-            .attr("width", 0)
             .style("opacity", 0)
             .remove();
         
@@ -143,7 +157,7 @@ class GroupedBarChart {
             .attr("class", d => `bar ${d.status.replace(/\s+/g, '-').toLowerCase()}`)
             .attr("x", d => vis.statusScale(d.status))
             .attr("y", d => vis.yScale(d.value))
-            .attr("width", 0)
+            .attr("width", vis.statusScale.bandwidth())
             .attr("height", d => vis.yScale(0) - vis.yScale(d.value))
             .attr("fill", d => vis.colorScale(d.status))
             .style("opacity", 0)
@@ -218,7 +232,7 @@ class GroupedBarChart {
             // Highlight smoking status that user filtered for
             .style("opacity", (d, i) => vis.filterStatus == "" || d == vis.filterStatus ? 1 : 0.4);
 
-        vis.labels = vis.legend.selectAll(".label")
+        vis.labels = vis.legend.selectAll(".legend-label")
             .data(vis.smokingStatuses, d => d);
         
         vis.labels.exit().remove();
@@ -226,7 +240,7 @@ class GroupedBarChart {
         vis.labels.enter()
             .append("text")
             .merge(vis.labels)
-            .attr("class", "label")
+            .attr("class", "legend-label")
             .attr("x", 20)
             .attr("y", (d, i) => i * 22 + 21.5)
             .attr("fill", (d, i) => vis.colorScale(d))
