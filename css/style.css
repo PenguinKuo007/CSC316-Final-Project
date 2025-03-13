@@ -1,6 +1,5 @@
-
-.container {
-    width: 890px;
+.message {
+    max-width: 890px;
 }
 
 #graphic {
@@ -79,8 +78,13 @@
 
 body {
     font-family:  Georgia, serif;
-
 }
+
+#vis1 {
+    width: 100%;
+    height: 100%;
+}
+
 #vis1 .x-axis .domain {
     display: none;
 }

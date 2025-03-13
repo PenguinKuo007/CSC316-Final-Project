@@ -8,9 +8,14 @@ class InnovativeVis {
         this.displayOuterDonut = []; // For outermost donut chart
         this.displayCircles = [];    // For circles
 
+        this.oldInnerDonut = {}; // Keep track of old donut data 
+        this.oldOuterDonut = {}; // for transitioning
+
         this.smokingStatuses = ["Smoker", "Former Smoker", "Non-Smoker"];
         this.cancerStages = ["I", "II", "III", "IV"];
         this.mortalityRisks = [0.3, 0.6, 0.9]; // Sample numbers for legend
+
+        this.filterStatus = ""; // Filter the smoking status
 
         this.initVis();
     }
@@ -116,6 +121,12 @@ class InnovativeVis {
             .attr("transform", `translate(0, ${320 + vis.radiusScale(d3.max(vis.mortalityRisks)) / 1.5})`);
 
 
+        // Tooltip
+        vis.tooltip = d3.select("body")
+            .append("div")
+            .attr("id", "innovative-tooltip");
+        
+
         vis.wrangleData();
     }
 
@@ -146,6 +157,14 @@ class InnovativeVis {
                 stage: d.Stage_at_Diagnosis,
                 value: (vis.mortalityRiskInfo[`${d.Smoking_Status} ${d.Stage_at_Diagnosis}`]?.value || 0) + +d.Mortality_Risk,
                 count: (vis.mortalityRiskInfo[`${d.Smoking_Status} ${d.Stage_at_Diagnosis}`]?.count || 0) + 1 // Used to calculate average later
+            }
+
+            // Filter smoking status, if necessary
+            // Note: need to set to 0 for transitioning, instead of removing entirely
+            if (vis.filterStatus != "" && d.Smoking_Status != vis.filterStatus) {
+                vis.smokingStatusInfo[d.Smoking_Status].value = 0;
+                vis.cancerStageInfo[`${d.Smoking_Status} ${d.Stage_at_Diagnosis}`].value = 0;
+                vis.mortalityRiskInfo[`${d.Smoking_Status} ${d.Stage_at_Diagnosis}`].value = 0;
             }
         });
 
@@ -186,52 +205,119 @@ class InnovativeVis {
 
         vis.innerArcs.enter()
             .append("path")
-            .merge(vis.innerArcs)
             .attr("class", "arc inner-arc")
-            .attr("d", vis.innerArc)
+            .style("fill", (d, i) => vis.colors[d.data.status])
+            .merge(vis.innerArcs)
+            // Handle mouse events
+            .on("click", function (event, d) {
+                vis.handleArcClick(event, d);
+            })
+            .on("mouseover", function (event, d) {
+                vis.handleArcMouseOver(event, d, 
+                    `Number of <span style="color: ${vis.colors[d.data.status]};">${d.data.status}s</span>`,
+                    d3.format(",")(d.data.value));
+            })
+            .on("mouseout", function (event, d) {
+                vis.handleArcMouseOut(event, d);
+            })
+            .transition()
+            .duration(800)
+            .attrTween("d", function (d, i) {
+                // Interpolate from old arc position to new arc position
+                let interpolate = d3.interpolate(vis.oldInnerDonut[d.data.status] || d, d);
+                return (t) => vis.innerArc(interpolate(t));
+            })
             .style("fill", (d, i) => vis.colors[d.data.status]);
 
         vis.outerArcs.enter()
             .append("path")
-            .merge(vis.outerArcs)
             .attr("class", "arc outer-arc")
-            .attr("d", vis.outerArc)
+            .style("fill", (d, i) => vis.colorShade(d.data.stage, vis.colors[d.data.status]))
+            .merge(vis.outerArcs)
+            // Handle mouse events
+            .on("click", function (event, d) {
+                vis.handleArcClick(event, d);
+            })
+            .on("mouseover", function (event, d) {
+                vis.handleArcMouseOver(event, d, 
+                    `Number of <span style="color: ${vis.colors[d.data.status]};">${d.data.status}s</span> 
+                    with <span style="color: ${vis.colorShade(d.data.stage, vis.colors[d.data.status])};">Stage ${d.data.stage}</span> Lung Cancer`,
+                    d3.format(",")(d.data.value));
+            })
+            .on("mouseout", function (event, d) {
+                vis.handleArcMouseOut(event, d);
+            })
+            .transition()
+            .duration(800)
+            .attrTween("d", function (d, i) {
+                // Interpolate from old arc position to new arc position
+                let interpolate = d3.interpolate(vis.oldOuterDonut[`${d.data.status} ${d.data.stage}`] || d, d);
+                return (t) => vis.outerArc(interpolate(t));
+            })
             .style("fill", (d, i) => vis.colorShade(d.data.stage, vis.colors[d.data.status]));
         
         
         // Enter/exit/update lines (connections between arcs and circles)
         vis.lines = vis.chartGroup.selectAll(".line")
-            .data(vis.pie(vis.displayOuterDonut), d => d.data.stage);
+            .data(vis.pie(vis.displayOuterDonut.filter(d => d.value > 0)), d => `${d.data.status} ${d.data.stage}`);
 
         vis.lines.exit().remove();
 
         vis.lines.enter()
             .append("line")
             .merge(vis.lines)
+            .transition()
+            .duration(800)
             .attr("class", "line")
-            // Calculate the center of each outer arc edge along the circumference of the donut chart
-            .attr("x1", (d, i) => vis.outerRadius2 * Math.cos(-(Math.PI + d.startAngle + d.endAngle) / 2))
-            .attr("y1", (d, i) => vis.outerRadius2 * Math.sin(-(Math.PI + d.startAngle + d.endAngle) / 2))
-            // Calculate the location of the center of the corresponding circle above each arc
-            .attr("x2", (d, i) => (vis.outerRadius2 * 1.25) * Math.cos(-(Math.PI + d.startAngle + d.endAngle) / 2))
-            .attr("y2", (d, i) => (vis.outerRadius2 * 1.25) * Math.sin(-(Math.PI + d.startAngle + d.endAngle) / 2));
+            .attrTween("x1", function (d, i) {
+                return vis.circleLineTween(d, i, true, vis.outerRadius2);
+            })
+            .attrTween("y1", function (d, i) {
+                return vis.circleLineTween(d, i, false, vis.outerRadius2);
+            })
+            .attrTween("x2", function (d, i) {
+                return vis.circleLineTween(d, i, true, vis.outerRadius2 * 1.25);
+            })
+            .attrTween("y2", function (d, i) {
+                return vis.circleLineTween(d, i, false, vis.outerRadius2 * 1.25);
+            });
             
+
+        // Set up outer donut data for use by circles
+        let outerDonutData = {};
+        vis.pie(vis.displayOuterDonut, d => d.data.stage).forEach((d) => {
+            outerDonutData[`${d.data.status} ${d.data.stage}`] = d;
+        });
 
         // Enter/exit/update circles
         vis.circles = vis.chartGroup.selectAll(".circle")
-            .data(vis.pie(vis.displayOuterDonut), d => d.data.stage);
+            .data(vis.displayCircles.filter(d => d.value > 0),  d => `${d.status} ${d.stage}`);
 
         vis.circles.exit().remove();
         
         vis.circles.enter()
             .append("circle")
-            .merge(vis.circles)
             .attr("class", "circle")
-            // Calculate the center of each outer arc edge along the circumference of the donut chart
-            // (and "push" the radius out a little more)
-            .attr("cx", (d, i) => (vis.outerRadius2 * 1.25) * Math.cos(-(Math.PI + d.startAngle + d.endAngle) / 2))
-            .attr("cy", (d, i) => (vis.outerRadius2 * 1.25) * Math.sin(-(Math.PI + d.startAngle + d.endAngle) / 2))
-            .attr("r", (d, i) => vis.radiusScale(vis.displayCircles[i].value));
+            .merge(vis.circles)
+            // Handle mouse events
+            .on("mouseover", function(event, d) {
+                vis.handleArcMouseOver(event, d, 
+                    `Average Mortality Risk of <span style="color: ${vis.colors[d.status]};">${d.status}s</span> 
+                    with <span style="color: ${vis.colorShade(d.stage, vis.colors[d.status])};">Stage ${d.stage}</span> Lung Cancer`,
+                    d3.format(".2~%")(d.value));
+            })
+            .on("mouseout", function(event, d) {
+                vis.handleArcMouseOut(event, d);
+            })
+            .transition()
+            .duration(800)
+            .attrTween("cx", function (d, i) {
+                return vis.circleLineTween(outerDonutData[`${d.status} ${d.stage}`], i, true, vis.outerRadius2 * 1.25);
+            })
+            .attrTween("cy", function (d, i) {
+                return vis.circleLineTween(outerDonutData[`${d.status} ${d.stage}`], i, false, vis.outerRadius2 * 1.25);
+            })
+            .attr("r", (d, i) => vis.radiusScale(d.value));
 
         
         // Enter/exit/update legend smoking status
@@ -248,7 +334,9 @@ class InnovativeVis {
             .attr("height", 20)
             .attr("x", 0)
             .attr("y", (d, i) => i * 25)
-            .attr("fill", (d, i) => vis.colors[d]);
+            .attr("fill", (d, i) => vis.colors[d])
+            // Highlight smoking status that user filtered for
+            .style("opacity", (d, i) => vis.filterStatus == "" || d == vis.filterStatus ? 1 : 0.4);
 
         vis.statusLabels = vis.legendStatus.selectAll(".status-label")
             .data(vis.smokingStatuses, d => d);
@@ -262,6 +350,8 @@ class InnovativeVis {
             .attr("x", 27)
             .attr("y", (d, i) => i * 25 + 15)
             .attr("fill", (d, i) => vis.colors[d])
+            // Highlight smoking status that user filtered for
+            .style("opacity", (d, i) => vis.filterStatus == "" || d == vis.filterStatus ? 1 : 0.4)
             .text((d, i) => d);
 
         
@@ -322,5 +412,72 @@ class InnovativeVis {
             .attr("x", vis.radiusScale(d3.max(vis.mortalityRisks)) + 18)
             .attr("y", (d, i) => i * (vis.radiusScale(d) + vis.radiusScale(d3.max(vis.mortalityRisks))) + 15)
             .text((d, i) => d3.format("~%")(d));
+    }
+
+    handleArcClick(event, d) {
+        let vis = this;
+
+        // Set up old donut data for use while transitioning
+        vis.oldInnerDonut = {};
+        vis.pie(vis.displayInnerDonut).forEach((d) => {
+            vis.oldInnerDonut[d.data.status] = d;
+        });
+
+        vis.oldOuterDonut = {};
+        vis.pie(vis.displayOuterDonut).forEach((d) => {
+            vis.oldOuterDonut[`${d.data.status} ${d.data.stage}`] = d;
+        });
+
+        // Toggle filtering smoking status on mouse click
+        vis.filterStatus = vis.filterStatus === "" ? d.data.status : "";
+        vis.wrangleData();
+    }
+
+    handleArcMouseOver(event, d, title, value) {
+        let vis = this;
+
+        // Show tooltip on mouse over
+        vis.tooltip
+            .style("opacity", 1)
+            .style("left", event.pageX + 20 + "px")
+            .style("top", event.pageY + "px")
+            .html(`
+                <div id="innovative-tooltip-background">     
+                    <p>${title}:</p>
+                    <p id="innovative-tooltip-value">${value}</p>
+                </div>`);
+    }
+
+    handleArcMouseOut(event, d) {
+        let vis = this;
+
+        // Hide tooltip on mouse out
+        vis.tooltip
+            .style("opacity", 0)
+            .style("left", 0)
+            .style("top", 0)
+            .html(``);
+    }
+
+    // attrTween() for circle and line SVG elements
+    circleLineTween(d, i, isXPosition, radius) {
+        let vis = this;
+
+        // Interpolate from old circle/line position to new circle/line position based on outer donut chart positions
+        let interpolate = d3.interpolate(vis.oldOuterDonut[`${d.data.status} ${d.data.stage}`] || d, d);
+        
+        return function (t) {
+            // Get the current interpolated value
+            let arcData = interpolate(t);
+
+            // Calculate the center of each outer arc edge along the circumference of the donut chart
+            // (and "push" the radius out a little more by `radius` amount)
+            if (isXPosition) {
+                return radius * Math.cos((-Math.PI + arcData.startAngle + arcData.endAngle) / 2);
+            }
+            else {
+                return radius * Math.sin((-Math.PI + arcData.startAngle + arcData.endAngle) / 2);
+            }
+        };
     }
 }

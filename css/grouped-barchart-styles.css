@@ -1,0 +1,65 @@
+#grouped-barchart-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+#grouped-barchart-div {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+#grouped-barchart-div text {
+    font-size: 0.75rem;
+    color: black;
+}
+
+#grouped-barchart-div .axis path,
+#grouped-barchart-div .axis line {
+    shape-rendering: crispEdges;
+}
+
+#grouped-barchart-div .bar:hover {
+    stroke: black;
+    stroke-width: 2px;
+}
+
+#grouped-barchart-div .label {
+    text-anchor: middle;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+#grouped-barchart-div .legend-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+#grouped-barchart-div .legend-label {
+    font-size: 0.875rem;
+}
+
+#grouped-barchart-tooltip {
+    position: absolute;
+    font-size: 0.875rem;
+}
+
+#grouped-barchart-tooltip-background {
+    background: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.6rem;
+}
+
+#grouped-barchart-tooltip p {
+    margin: 0;
+    white-space: pre-line;
+}
+
+#grouped-barchart-tooltip-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}

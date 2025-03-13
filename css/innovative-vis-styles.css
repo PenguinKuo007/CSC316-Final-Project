@@ -1,6 +1,8 @@
 .container-fluid {
     width: 100vw;
     height: 100vh;
+    min-height: fit-content;
+    max-width: 100%;
     margin: 0;
     padding: 0;
 }
@@ -32,7 +34,15 @@
     min-width: 500px;
     min-height: 500px;
     margin: 1rem 0;
-    padding: 1rem;
+    padding: 2rem;
+}
+
+#innovative-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
 }
 
 #innovative-div {
@@ -45,6 +55,9 @@
 #innovative-div .arc {
     stroke: black;
 }
+#innovative-div .arc:hover {
+    stroke-width: 3px;
+}
 
 #innovative-div .line {
     stroke: black;
@@ -53,6 +66,9 @@
 #innovative-div .circle {
     fill: lightgray;
     stroke: black;
+}
+#innovative-div .circle:hover {
+    stroke-width: 3px;
 }
 
 #innnovative-div text {
@@ -63,4 +79,26 @@
 #innovative-div .color-shade-text {
     font-size: 0.75rem;
     fill: #555;
+}
+
+#innovative-tooltip {
+    position: absolute;
+    font-size: 0.875rem;
+}
+
+#innovative-tooltip-background {
+    background: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.6rem;
+}
+
+#innovative-tooltip p {
+    margin: 0;
+    white-space: pre-line;
+}
+
+#innovative-tooltip-value {
+    font-weight: bold;
+    font-size: 1.1rem;
 }
