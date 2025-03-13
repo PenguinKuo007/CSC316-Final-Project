@@ -35,6 +35,14 @@
     padding: 2rem;
 }
 
+#innovative-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
 #innovative-div {
     width: 100%;
     height: auto;

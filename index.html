@@ -5,6 +5,7 @@
     <title>Smoking and Lung Cancer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grouped-barchart-styles.css">
     <link rel="stylesheet" href="css/innovative-vis-styles.css">
 </head>
 <body>
@@ -23,11 +24,11 @@
 
     <div class="row align-items-center">
         <div class="col-md-6">
-
             <h2>How do smokers vs non-smokers compare at each lung cancer stage?</h2>
         </div>
         <div class="col-md-6">
-            <img src="img/num-patients-at-lung-cancer-stage.png" alt="Lung Cancer Stage Comparison" height="500" width="600">
+            <h3 id="grouped-barchart-title">The Number of Patients at each Lung Cancer Stage</h3>
+            <div id="grouped-barchart-div"></div>
         </div>
     </div>
 
@@ -50,6 +51,7 @@
         </div>
 
         <div class="col-md-7">
+            <h3 id="innovative-title">Number of Smokers vs. Non-Smokers at each Lung Cancer Stage and their Average Mortality Risk</h3>
             <div id="innovative-div"></div>
         </div>
     </div>
@@ -116,6 +118,7 @@
 <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
 <!-- OWN JS -->
+<script src="js/groupedBarChart.js"></script>
 <script src="js/innovativeVis.js"></script>
 <script src="js/barchart.js"></script>
 <script src="js/vis1.js"></script>
