@@ -33,7 +33,16 @@
             <h2>What is the life expectancy of someone with lung cancer?</h2>
         </div>
         <div class="col-md-6">
-            <img src="img/life-expectancy-line-chart.png" alt="Life Expectancy Line Chart" height="500" width="100%">
+            <p class="align-self-center">
+                <select id='categorySelector' class="custom-select align-self-center" onchange="categoryChange()">
+                    <option value="all" selected>All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </p>
+            <div id="vis2"> </div>
+            <div id="visBrush"></div>
+
         </div>
     </div>
 </div>
@@ -105,6 +114,8 @@
 <script src="js/barchart.js"></script>
 <script src="js/vis1.js"></script>
 <script src="js/main.js"></script>
-
+<script src="js/vis2.js"></script>
+<script src="js/helper.js"></script>
+<script src="js/visBrush.js"></script>
 </body>
 </html>

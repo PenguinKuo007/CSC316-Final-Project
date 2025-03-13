@@ -111,3 +111,11 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+#vis2 .area {
+    fill: #3fbcc6;
+}
+
+#visBrush .area {
+    fill: #3fbcc6;
+}
