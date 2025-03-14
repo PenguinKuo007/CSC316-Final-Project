@@ -95,7 +95,7 @@ class BarChart {
   
       vis.legend = vis.svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(20, 30)`);
+        .attr("transform", `translate(${vis.width - 150}, 30)`);
   
       /*
         The following line drawing the legend was generated with the help of ChatGPT.
