@@ -105,6 +105,7 @@ body {
 }
 .row{
     height: 100vh;
+    padding: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
