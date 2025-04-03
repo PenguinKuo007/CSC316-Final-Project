@@ -7,92 +7,104 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/grouped-barchart-styles.css">
     <link rel="stylesheet" href="css/innovative-vis-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.35/fullpage.min.css" integrity="sha512-iAaF5fq80leSduZ1kXbQ5U9y87CgxxY4JDO5ZEYMfYUVSbYw8dAn3lz0mSWmr8sEYpGGPYzXzhB/1pRzK2tn0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-<div class="container">
-    <div class="row">
-        <div class="message">
-            <p>Is your organization advocating for and working towards helping smokers to quit smoking?</p>
-            <p>Explore these insights to discover effective ways to encourage them to stop!</p>
-        </div>
-    </div>
-
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>How do smokers vs non-smokers compare at each lung cancer stage?</h2>
-        </div>
-        <div class="col-md-6">
-            <h3 id="grouped-barchart-title">The Number of Patients at each Lung Cancer Stage</h3>
-            <div id="grouped-barchart-div"></div>
-        </div>
-    </div>
-
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>What is the life expectancy of someone with lung cancer?</h2>
-        </div>
-        <div class="col-md-6">
-            <p class="align-self-center">
-                <select id='categorySelector' class="custom-select align-self-center" onchange="categoryChange()">
-                    <option value="all" selected>All</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-            </p>
-            <div id="vis2"> </div>
-            <div id="visBrush"></div>
-
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    <div id="innovative-container" class="row">
-        <div class="col-md-3">
-            <h2>How do smokers vs non-smokers compare at each lung cancer stage? What is their mortality risk at each stage?</h2>
-        </div>
-
-        <div class="col-md-7">
-            <h3 id="innovative-title">Number of Smokers vs. Non-Smokers at each Lung Cancer Stage and their Average Mortality Risk</h3>
-            <div id="innovative-div"></div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="message">
-            Smokers should quit smoking to lower their risk of developing lung cancer.
-        </div>
-    </div>
-
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>How many people with lung cancer still continue to smoke?</h2>
-        </div>
-        <div class="col-md-6" style="height: 100%; max-height: 400px;">
-            <div id="vis1" class="text-center">
+<div id="fullpage">
+    <div class="section">
+        <div class="row">
+            <div class="message">
+                <p>Is your organization advocating for and working towards helping smokers to quit smoking?</p>
+                <p>Explore these insights to discover effective ways to encourage them to stop!</p>
             </div>
         </div>
     </div>
-
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>How does second hand smoke exposure impact the risk of lung cancer in non-smokers?</h2>
-        </div>
-        <div class="col-md-6">
-            <div id="barchart-secondhand" class="text-center" style="width:100%; height:50vh;"></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="message">
-            <h2>Solutions</h2>
-            <h3>PlaceHolder</h3>
+    <div class="section">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>How do smokers vs non-smokers compare at each lung cancer stage?</h2>
+            </div>
+            <div class="col-md-6">
+                <h3 id="grouped-barchart-title">The Number of Patients at each Lung Cancer Stage</h3>
+                <div id="grouped-barchart-div"></div>
+            </div>
         </div>
     </div>
+    <div class="section">
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>What is the life expectancy of someone with lung cancer?</h2>
+            </div>
+            <div class="col-md-6">
+                <p class="align-self-center">
+                    <select id='categorySelector' class="custom-select align-self-center" onchange="categoryChange()">
+                        <option value="all" selected>All</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </p>
+                <div id="vis2"> </div>
+                <div id="visBrush"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container-fluid">
+            <div id="innovative-container" class="row">
+                <div class="col-md-3">
+                    <h2>How do smokers vs non-smokers compare at each lung cancer stage? What is their mortality risk at each stage?</h2>
+                </div>
+
+                <div class="col-md-7">
+                    <h3 id="innovative-title">Number of Smokers vs. Non-Smokers at each Lung Cancer Stage and their Average Mortality Risk</h3>
+                    <div id="innovative-div"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="row">
+            <div class="message">
+                Smokers should quit smoking to lower their risk of developing lung cancer.
+            </div>
+        </div>
+
+    </div>
+    <div class="section">
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>How many people with lung cancer still continue to smoke?</h2>
+            </div>
+            <div class="col-md-6" style="height: 100%; max-height: 400px;">
+                <div id="vis1" class="text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>How does second hand smoke exposure impact the risk of lung cancer in non-smokers?</h2>
+            </div>
+            <div class="col-md-6">
+                <div id="barchart-secondhand" class="text-center" style="width:100%; height:50vh;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="row">
+            <div class="message">
+                <h2>Solutions</h2>
+                <h3>PlaceHolder</h3>
+            </div>
+        </div></div>
 </div>
+
+
 
 <!-- - - - - - - - - - - - >
 <    Load JS libraries     >
@@ -117,5 +129,14 @@
 <script src="js/vis2.js"></script>
 <script src="js/helper.js"></script>
 <script src="js/visBrush.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.35/fullpage.min.js" integrity="sha512-at/DNhqW5WMYWKbz16l1lnf2XUuavpQ7j4+m6QEwj+gnjAght9yptWBfCKuJFW3naxfGgZYr0jUX13zzZd0TPw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    new fullpage('#fullpage', {
+        //options here
+        autoScrolling:true,
+        scrollHorizontally: true,
+        navigation: true,
+    });
+</script>
 </body>
 </html>
