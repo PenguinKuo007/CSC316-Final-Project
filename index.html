@@ -11,13 +11,11 @@
 </head>
 <body>
 <div id="fullpage">
-    <div class="section">
-        <div class="row">
+    <div class="section align-items-center">
             <div class="message">
                 <p>Is your organization advocating for and working towards helping smokers to quit smoking?</p>
                 <p>Explore these insights to discover effective ways to encourage them to stop!</p>
             </div>
-        </div>
     </div>
     <div class="section">
         <div class="row align-items-center">
@@ -31,7 +29,6 @@
         </div>
     </div>
     <div class="section">
-
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h2>What is the life expectancy of someone with lung cancer?</h2>
@@ -46,7 +43,6 @@
                 </p>
                 <div id="vis2"> </div>
                 <div id="visBrush"></div>
-
             </div>
         </div>
     </div>
@@ -133,9 +129,12 @@
 <script>
     new fullpage('#fullpage', {
         //options here
-        autoScrolling:true,
+        autoScrolling: true,
+        fitToSection: true,
         scrollHorizontally: true,
         navigation: true,
+        scrollingSpeed: 1000,
+
     });
 </script>
 </body>
