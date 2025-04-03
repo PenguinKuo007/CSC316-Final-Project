@@ -12,11 +12,18 @@
 <body>
 <div id="fullpage">
     <div class="section align-items-center">
-            <div class="message">
-                <p>Is your organization advocating for and working towards helping smokers to quit smoking?</p>
-                <p>Explore these insights to discover effective ways to encourage them to stop!</p>
-            </div>
+        <div class="message">
+            <p>Is your organization advocating for and working towards helping smokers to quit smoking?</p>
+            <p>Explore these insights to discover effective ways to encourage them to stop!</p>
+        </div>
     </div>
+
+    <div class="section align-items-center">
+        <div class="message">
+            <p>A series of data visualizations will be presented, each exploring a specific question, followed by a discussion of the insights gained from each visualization.</p>
+        </div>
+    </div>
+
     <div class="section">
         <div class="row align-items-center">
             <div class="col-md-6">
@@ -28,6 +35,7 @@
             </div>
         </div>
     </div>
+
     <div class="section">
         <div class="row align-items-center">
             <div class="col-md-6">
@@ -46,13 +54,13 @@
             </div>
         </div>
     </div>
+
     <div class="section">
         <div class="container-fluid">
             <div id="innovative-container" class="row">
                 <div class="col-md-3">
                     <h2>How do smokers vs non-smokers compare at each lung cancer stage? What is their mortality risk at each stage?</h2>
                 </div>
-
                 <div class="col-md-7">
                     <h3 id="innovative-title">Number of Smokers vs. Non-Smokers at each Lung Cancer Stage and their Average Mortality Risk</h3>
                     <div id="innovative-div"></div>
@@ -60,16 +68,25 @@
             </div>
         </div>
     </div>
+
     <div class="section">
         <div class="row">
             <div class="message">
-                Smokers should quit smoking to lower their risk of developing lung cancer.
+                <p>Overall, the main message to take away from these visualizations is:</p>
+                <p id="main-message">Smokers should quit smoking to lower their risk of developing lung cancer and to prevent their condition from worsening.</p>
             </div>
         </div>
-
     </div>
-    <div class="section">
 
+    <div class="section">
+        <div class="row">
+            <div class="message">
+                <p>Before presenting some resources that you can recommend to smokers to help them quit smoking, here are some additional visualizations with interesting insights.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h2>How many people with lung cancer still continue to smoke?</h2>
@@ -80,8 +97,8 @@
             </div>
         </div>
     </div>
-    <div class="section">
 
+    <div class="section">
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h2>How does second hand smoke exposure impact the risk of lung cancer in non-smokers?</h2>
@@ -91,16 +108,30 @@
             </div>
         </div>
     </div>
+
     <div class="section">
         <div class="row">
             <div class="message">
-                <h2>Solutions</h2>
-                <h3>PlaceHolder</h3>
+                <h2>Resources to Help Smokers Quit Smoking</h2>
+                <ul>
+                    <li>blah</li>
+                </ul>
             </div>
-        </div></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="row">
+            <div class="message">
+                <h2>References</h2>
+                <ul>
+                    <li>Ankit. (2025). Lung Cancer Risk & Prediction Dataset [Data set]. Kaggle. <a href="https://doi.org/10.34740/KAGGLE/DSV/10723076">https://doi.org/10.34740/KAGGLE/DSV/10723076</a></li>
+                    <li>Rashad Mammadov. (2024). Lung Cancer Prediction [Data set]. Kaggle. <a href="https://doi.org/10.34740/KAGGLE/DS/5109540">https://doi.org/10.34740/KAGGLE/DS/5109540</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-
-
 
 <!-- - - - - - - - - - - - >
 <    Load JS libraries     >
@@ -125,6 +156,8 @@
 <script src="js/vis2.js"></script>
 <script src="js/helper.js"></script>
 <script src="js/visBrush.js"></script>
+
+<!-- FULLPAGE -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.35/fullpage.min.js" integrity="sha512-at/DNhqW5WMYWKbz16l1lnf2XUuavpQ7j4+m6QEwj+gnjAght9yptWBfCKuJFW3naxfGgZYr0jUX13zzZd0TPw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     new fullpage('#fullpage', {
@@ -134,7 +167,6 @@
         scrollHorizontally: true,
         navigation: true,
         scrollingSpeed: 1000,
-
     });
 </script>
 </body>
