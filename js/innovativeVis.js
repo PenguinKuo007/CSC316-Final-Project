@@ -63,7 +63,7 @@ class InnovativeVis {
         // Define scale for circle radius
         vis.radiusScale = d3.scaleSqrt()
             .domain([0, 1]) // Domain of mortality risk
-            .range([1, vis.outerRadius2 / 10]);
+            .range([1, vis.outerRadius2 / 12]);
         
         
         // Set up colors, color scale, and color shade
