@@ -26,7 +26,7 @@ This project aims to support organizations in raising awareness about the negati
   - `innovative-vis-styles.css`: Styles for the custom innovative visualization.
   - `style.css`: General styles for the project website.
 
-- **HTML*
+- **HTML**
   - `index.html`: Main HTML file hosting the visualizations and page structure.
 
 ### Data
