@@ -16,8 +16,9 @@ This project aims to support organizations in raising awareness about the negati
   - `groupedBarChart.js`: Custom implementation of grouped bar charts.
   - `innovativeVis.js`: Advanced visualization script developed for project-specific data representation.
   - `main.js`: Central JS file that initializes visualizations.
-  - `vis1.js`, `vis2.js`: Additional custom visualizations.
-  - `visBrush.js`: Custom interactive brushing feature.
+  - `SurvivalVis.js`: Custom implementation of area chart visualization on survival month.
+  - `SurvivalBrushVis.js`: Custom interactive brushing feature for survival month area chart.
+  - `mokingStatusVis.js`: Custom implementation of a bar chart visualization on smoking status.
   - `helper.js`: Utility functions used throughout the visualizations.
 
 - **CSS** (`css/`)

@@ -1,17 +1,16 @@
-class Vis2 {
-    constructor(parentElement, data) {
+class SurvivalBrushVis {
+    constructor(parentElement, data, eventHandler) {
         this.parentElement = parentElement;
         this.data = data;
-        this.filterData = data;
-        this.ageStart = 29;
-        this.ageEnd = 80;
+        this.eventHandler = eventHandler;
+        console.log(data);
         this.initVis();
     }
 
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 50, right: 50, bottom: 50, left: 60  };
+        vis.margin = { top: 20, right: 50, bottom: 50, left: 60  };
         const size = document.getElementById(vis.parentElement).getBoundingClientRect();
         vis.width = size.width - vis.margin.left - vis.margin.right;
         vis.height = size.height - vis.margin.top - vis.margin.bottom;
@@ -23,33 +22,20 @@ class Vis2 {
             .append("g")
             .attr("transform", `translate(${vis.margin.left},${vis.margin.top})`);
 
-        vis.title = vis.svg
-            .append("text")
-            .attr("class", "title")
-            .attr("x", vis.width / 2)
-            .attr("y", -35)
-            .attr("text-anchor", "middle")
-            .style("font-weight", "bold")
-            .text("Average Survival Month of People with Lung Cancer by Age");
-
         vis.x = d3.scaleLinear().range([0, vis.width]);
 
         vis.y = d3.scaleLinear().range([vis.height, 0]);
 
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
-            .tickFormat(d => d3.format("d")(d + vis.ageStart));
+            .tickFormat(d => d + 29);
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y);
 
-
-
-
         vis.agePath = vis.svg.append("path")
             .attr("class", "area area-age");
 
-        // Define the D3 path generator
         vis.area = d3.area()
             .x(function (d, index) { return vis.x(index); })
             .y0(vis.height)
@@ -70,13 +56,34 @@ class Vis2 {
         vis.svg.append("text")
             .attr("x", -45)
             .attr("y", -8)
-            .text("Average Survival Month");
+            .text("Count");
         vis.svg.append("text")
             .attr("x", vis.width )
             .attr("y", vis.height + 25)
             .text("Age");
 
+        vis.currentBrushRegion = null;
 
+
+        vis.brush = d3.brushX()
+            .extent([[0, 0], [vis.width, vis.height]])
+            .on("brush", function(event) {
+
+                vis.currentBrushRegion = event.selection;
+
+                if (vis.currentBrushRegion) {
+
+                    let brushRange = vis.currentBrushRegion.map(vis.x.invert);
+
+                    if (vis.eventHandler) {
+                        vis.eventHandler.trigger("selectionChanged", brushRange);
+                    }
+                }
+            });
+
+        vis.brushGroup = vis.svg.append("g")
+            .attr("class", "brush")
+            .call(vis.brush);
 
         vis.wrangleData();
     }
@@ -99,25 +106,11 @@ class Vis2 {
             vis.filterData = vis.data.filter(d => d.Gender === "Female");
         }
 
-        vis.filterData = vis.filterData.filter(function (d) {
-            return d.Age >= vis.ageStart&& d.Age <= vis.ageEnd ;
-        });
-        console.log("after filtering");
-        console.log(vis.filterData);
-        vis.survivalData = d3.range(0,vis.ageEnd - vis.ageStart + 1).map(function(){
+        vis.ageCount =  d3.range(0,52).map(function(){
             return 0;
         });
 
-        vis.ageCount =  d3.range(0,vis.ageEnd - vis.ageStart + 1).map(function(){
-            return 0;
-        });
-
-        vis.filterData.forEach(d=>vis.survivalData[d.Age - vis.ageStart] += d.Survival_Months);
-        vis.filterData.forEach(d=>vis.ageCount[d.Age - vis.ageStart] += 1);
-        vis.survivalData.forEach((d,i)=>{if(vis.survivalData[i] !== 0){vis.survivalData[i]=  vis.survivalData[i] /vis.ageCount[i]}});
-
-        console.log(vis.survivalData);
-
+        vis.filterData.forEach(d=>vis.ageCount[d.Age - 29] += 1);
 
         vis.updateVis();
     }
@@ -125,29 +118,15 @@ class Vis2 {
     updateVis() {
         let vis = this;
 
-        vis.x.domain([0, vis.ageEnd - vis.ageStart ]);
-        vis.y.domain([0, d3.max(vis.survivalData)]);
-
-
+        vis.x.domain([0,51]);
+        vis.y.domain([0, d3.max(vis.ageCount)]);
 
         vis.agePath
-            .datum(vis.survivalData)
+            .datum(vis.ageCount)
             .transition()
             .attr("d", vis.area);
 
         vis.svg.select(".x-axis").call(vis.xAxis);
         vis.svg.select(".y-axis").transition().call(vis.yAxis);
-    }
-
-    onSelectionChange(rangeStart, rangeEnd) {
-
-        let vis = this;
-
-        vis.ageStart = Math.floor(rangeStart + 29);
-        vis.ageEnd = Math.floor(rangeEnd + 29);
-
-        console.log(vis.ageStart);
-        console.log(vis.ageEnd);
-        vis.wrangleData();
     }
 }
