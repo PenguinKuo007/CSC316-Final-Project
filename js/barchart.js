@@ -52,7 +52,7 @@ class BarChart {
         .append("tspan")
         .attr("x", vis.width / 2)
         .attr("dy", "1.2em")
-        .text("in Second-hand & non-second-ahnd smoker (without smoke)");
+        .text("in Second-hand & non-second-hand smoker (without smoke)");
         /* Above code was generated with the help of ChatGPT*/ 
   
       vis.xScale = d3.scaleBand().range([0, vis.width]).padding(0.3);
@@ -117,7 +117,10 @@ class BarChart {
           .text(`Second-Hand Smoke = ${cat}`);
       });
       /* Above code was generated with the help of ChatGPT*/ 
-  
+      
+      vis.tooltip = d3.select("body")
+        .append("div")
+        .attr("id", "grouped-barchart-tooltip");
   
       // Wrangle and render data
       vis.wrangleData();
@@ -126,34 +129,50 @@ class BarChart {
     
     wrangleData() {
       let vis = this;
-  
-      vis.filteredData = vis.data.filter(
-        (d) => d.Smoking_Status === "Non-Smoker"
-      );
-  
+    
+      // Filter for Non-Smoker if that is your requirement
+      vis.filteredData = vis.data.filter(d => d.Smoking_Status === "Non-Smoker");
+    
+      /* 
+        Roll up the data by second-hand smoke ("Yes" or "No") and compute:
+          - total count
+          - counts for each stage based on Stage_at_Diagnosis
+      */
       let roll = d3.rollup(
         vis.filteredData,
-        (v) => v.length,
-        (d) => d.Second_Hand_Smoke
+        v => {
+          return {
+            totalCount: v.length,
+            stageI: v.filter(d => d.Stage_at_Diagnosis === "I").length,
+            stageII: v.filter(d => d.Stage_at_Diagnosis === "II").length,
+            stageIII: v.filter(d => d.Stage_at_Diagnosis === "III").length,
+            stageIV: v.filter(d => d.Stage_at_Diagnosis === "IV").length
+          };
+        },
+        d => d.Second_Hand_Smoke
       );
-  
-      vis.aggData = Array.from(roll, ([key, count]) => ({
+    
+      // Convert rollup map to an array of objects
+      vis.aggData = Array.from(roll, ([key, val]) => ({
         secondHand: key,
-        count: count,
+        totalCount: val.totalCount,
+        stageI: val.stageI,
+        stageII: val.stageII,
+        stageIII: val.stageIII,
+        stageIV: val.stageIV
       }));
-  
-  
+      console.log(vis.aggData);
       // Update the visualization
       vis.updateVis();
     }
-  
+    
   
     updateVis() {
       let vis = this;
   
       vis.xScale.domain(vis.aggData.map((d) => d.secondHand).reverse());
   
-      let maxCount = d3.max(vis.aggData, (d) => d.count)+50000;
+      let maxCount = d3.max(vis.aggData, (d) => d.totalCount)+50000;
       vis.yScale.domain([0, maxCount]);
   
       let bars = vis.svg.selectAll(".bar")
@@ -169,12 +188,43 @@ class BarChart {
         .attr("height", 0)  // This is suggested by ChatGPT so that there is a somooth animation.
         .attr("fill", (d) => vis.color(d.secondHand))
         .merge(bars)
+
+        .on("mouseover", function(event, d) {
+          // Fade other bars if you like
+          vis.svg.selectAll(".bar").style("opacity", 0.4);
+          d3.select(this).style("opacity", 1);
+        
+          // Show + Move tooltip
+          vis.tooltip
+            .style("opacity", 1)
+            .style("left", (event.pageX + 20) + "px")   // position near cursor
+            .style("top", event.pageY + "px")
+            .html(`
+              <h5>Distribution of stage for ${d.secondHand === 'Yes' ? "Second-hand smoker" : "Non-second-hand smoker"}</h5>
+              <br>
+              <p>Stage I : ${d.stageI} people or ${Math.round(d.stageI/d.totalCount * 100)}%</p>
+              <p>Stage II : ${d.stageII} people or ${Math.round(d.stageII/d.totalCount * 100)}%</p>
+              <p>Stage III : ${d.stageIII} people or ${Math.round(d.stageIII/d.totalCount * 100)}%</p>
+              <p>Stage IV : ${d.stageIV} people or ${Math.round(d.stageIV/d.totalCount * 100)}%</p>
+              <br>
+              <p>Total: ${d.totalCount} people</p>
+            `);
+        })
+        .on("mouseout", function() {
+          // Restore bars
+          vis.svg.selectAll(".bar").style("opacity", 1);
+        
+          // Hide tooltip
+          vis.tooltip
+            .style("opacity", 0)
+            .html(``);
+        })
         .transition()
         .duration(1000)
         .attr("x", (d) => vis.xScale(d.secondHand))
-        .attr("y", (d) => vis.yScale(d.count))
+        .attr("y", (d) => vis.yScale(d.totalCount))
         .attr("width", vis.xScale.bandwidth())
-        .attr("height", (d) => vis.height - vis.yScale(d.count));
+        .attr("height", (d) => vis.height - vis.yScale(d.totalCount));
   
       bars.exit().remove();
   
@@ -192,8 +242,8 @@ class BarChart {
         .transition()
         .duration(1000)
         .attr("x", (d) => vis.xScale(d.secondHand) + vis.xScale.bandwidth() / 2)
-        .attr("y", (d) => vis.yScale(d.count) - 5)
-        .text((d) => d.count);
+        .attr("y", (d) => vis.yScale(d.totalCount) - 5)
+        .text((d) => d.totalCount);
   
       labels.exit().remove();
   
@@ -206,7 +256,8 @@ class BarChart {
             return "Non-second-hand smoker"
           };
       
-        }));
+        }))
+        .style("font-size", "16px"); 
   
       vis.yAxisGroup.transition().duration(1000)
         .call(d3.axisLeft(vis.yScale).tickFormat(d => d / 1000));
