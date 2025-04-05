@@ -45,13 +45,14 @@
 #grouped-barchart-tooltip {
     position: absolute;
     font-size: 0.875rem;
-}
-
-#grouped-barchart-tooltip-background {
     background: white;
     border: 2px solid black;
     border-radius: 5px;
     padding: 0.6rem;
+}
+
+#grouped-barchart-tooltip-background {
+    background: white;
 }
 
 #grouped-barchart-tooltip p {
