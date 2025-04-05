@@ -85,40 +85,40 @@ a:hover {
 }
 
 #section0 {
-    background-image: url("/img/background0.png");
+    background-image: url("img/background0.png");
 }
 #message-container0 {
     width: 50%;
 }
 
 #section1 {
-    background-image: url("/img/background1.png");
+    background-image: url("img/background1.png");
 }
 #message-container1 {
     width: 63%;
 }
 
 #section2 {
-    background-image: url("/img/background2.png");
+    background-image: url("img/background2.png");
 }
 #message-container2 {
     width: 65%;
 }
 
 #section3 {
-    background-image: url("/img/background3.png");
+    background-image: url("img/background3.png");
 }
 
 #section4 {
-    background-image: url("/img/background4.png");
+    background-image: url("img/background4.png");
 }
 
 #section5 {
-    background-image: url("/img/background5.png");
+    background-image: url("img/background5.png");
 }
 
 #section6 {
-    background-image: url("/img/background6.png");
+    background-image: url("img/background6.png");
 }
 #message-container6 {
     width: 57%;
@@ -129,29 +129,29 @@ a:hover {
 }
 
 #section7 {
-    background-image: url("/img/background7.png");
+    background-image: url("img/background7.png");
 }
 #message-container7 {
     width: 52%;
 }
 
 #section8 {
-    background-image: url("/img/background8.png");
+    background-image: url("img/background8.png");
 }
 
 #section9 {
-    background-image: url("/img/background9.png");
+    background-image: url("img/background9.png");
 }
 
 #section10 {
-    background-image: url("/img/background10.png");
+    background-image: url("img/background10.png");
 }
 #message-container10 {
     width: 67%;
 }
 
 #section11 {
-    background-image: url("/img/background11.png");
+    background-image: url("img/background11.png");
 }
 #message-container11 {
     width: 60%;
