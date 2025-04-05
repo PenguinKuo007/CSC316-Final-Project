@@ -43,9 +43,9 @@ In the following sections, Section 2 will provide a brief overview of the code s
 
 - **Datasets** (`data/`)
   
-  - `lung_cancer_data.csv`:  A cleaned dataset related to lung cancer and smoking, used by `groupedBarChart.js`, `SmokingStatusVis`, `SurvivalVis.js` and `SurvivalBrushVis.js`
+  - `lung_cancer_data.csv`:  A cleaned dataset related to lung cancer and smoking, used by `SmokingStatusVis`, `SurvivalVis.js` and `SurvivalBrushVis.js`
   
-  - `lung_cancer_prediction.csv`:  A cleaned dataset related to lung cancer and smoking, used by `innovativeVis.js` and `SecondHandSmokerVis.js`
+  - `lung_cancer_prediction.csv`:  A cleaned dataset related to lung cancer and smoking, used by `groupedBarChart.js`, `innovativeVis.js` and `SecondHandSmokerVis.js`
 
 ### Section 2.e: Other Assets
 - Images (`img/`): Background images for each slide.
