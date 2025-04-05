@@ -11,9 +11,9 @@ class VisBrush {
         let vis = this;
 
         vis.margin = { top: 20, right: 50, bottom: 50, left: 60  };
-        const container = document.getElementById(vis.parentElement);
-        vis.width = 600 - vis.margin.left - vis.margin.right;
-        vis.height = 200- vis.margin.top - vis.margin.bottom;
+        const size = document.getElementById(vis.parentElement).getBoundingClientRect();
+        vis.width = size.width - vis.margin.left - vis.margin.right;
+        vis.height = size.height - vis.margin.top - vis.margin.bottom;
 
         // Initialize drawing area with margins
         vis.svg = d3.select("#" + vis.parentElement)

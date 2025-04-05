@@ -62,7 +62,7 @@ class BarChart {
       vis.color = d3
                   .scaleOrdinal()
                   .domain(["No", "Yes"])
-                  .range(["blue", "red"]); 
+                  .range(["#b0bfc9", "#ee5f2c"]);
   
       // Axis groups
       vis.xAxisGroup = vis.svg
@@ -95,7 +95,7 @@ class BarChart {
   
       vis.legend = vis.svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${vis.width - 150}, 30)`);
+        .attr("transform", `translate(${vis.width - 150}, 0)`);
   
       /*
         The following line drawing the legend was generated with the help of ChatGPT.
@@ -151,7 +151,7 @@ class BarChart {
     updateVis() {
       let vis = this;
   
-      vis.xScale.domain(vis.aggData.map((d) => d.secondHand));
+      vis.xScale.domain(vis.aggData.map((d) => d.secondHand).reverse());
   
       let maxCount = d3.max(vis.aggData, (d) => d.count)+50000;
       vis.yScale.domain([0, maxCount]);

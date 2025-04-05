@@ -11,9 +11,10 @@ class InnovativeVis {
         this.oldInnerDonut = {}; // Keep track of old donut data 
         this.oldOuterDonut = {}; // for transitioning
 
-        this.smokingStatuses = ["Smoker", "Former Smoker", "Non-Smoker"];
+        this.smokingStatuses = ["Non-Smoker", "Former Smoker", "Smoker"];
         this.cancerStages = ["I", "II", "III", "IV"];
         this.mortalityRisks = [0.3, 0.6, 0.9]; // Sample numbers for legend
+        this.statusColours = ["#9ab2c1", "#c06a4a", "#ee5f2c"];
 
         this.filterStatus = ""; // Filter the smoking status
 
@@ -23,7 +24,7 @@ class InnovativeVis {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 220, bottom: 20, left: 20};
+        vis.margin = {top: 20, right: 230, bottom: 20, left: 20};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -69,7 +70,7 @@ class InnovativeVis {
         // Set up colors, color scale, and color shade
         vis.colors = {};
         vis.smokingStatuses.forEach((status, i) => {
-            vis.colors[status] = d3.schemeTableau10[i];
+            vis.colors[status] = vis.statusColours[i];
         });
 
         vis.colorScale = d3.scaleSequential()
@@ -89,6 +90,7 @@ class InnovativeVis {
         
         // Legend: smoking status
         vis.legend.append("text")
+            .attr("class", "legend-title")
             .text("Smoking Status");
 
         vis.legendStatus = vis.legend.append("g")
@@ -96,6 +98,7 @@ class InnovativeVis {
 
         // Legend: lung cancer stage
         vis.legend.append("text")
+            .attr("class", "legend-title")
             .attr("y", 130)
             .text("Lung Cancer Stage");
 
@@ -114,6 +117,7 @@ class InnovativeVis {
 
         // Legend: average mortality risk
         vis.legend.append("text")
+            .attr("class", "legend-title")
             .attr("y", 320)
             .text("Average Mortality Risk");
             

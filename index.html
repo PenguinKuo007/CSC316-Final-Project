@@ -11,69 +11,79 @@
 </head>
 <body>
 <div id="fullpage">
-    <div class="section align-items-center">
-        <div class="message">
-            <h1>Smoking &amp; Lung Cancer Insights for Organizations Advocating for Smokers to Quit Smoking</h1>
-            <p id="authors">By: Jennifer Cao, Kuan-Lin (Luke) Kuo, &amp; Chieh-An (Andy) Chang</p>
-        </div>
-    </div>
-
-    <div class="section align-items-center">
-        <div class="message">
-            <p>Is your organization advocating for and working towards helping smokers to quit smoking?</p>
-            <p>Explore these insights to discover effective ways to encourage them to stop!</p>
-        </div>
-    </div>
-
-    <div class="section align-items-center">
-        <div class="message">
-            <p>A series of data visualizations will be presented, each exploring a specific question, followed by a discussion of the insights gained from each visualization.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="row align-items-center">
-            <div class="col-md-6 vis-message">
-                <h2>How do smokers vs non-smokers compare at each lung cancer stage?</h2>
-                <p>The visualization shows that there are more smokers than non-smokers with stage III and stage IV lung cancer. This suggests that smoking may be associated with being diagnosed with higher severity of lung cancer.</p>
+    <div id="section0" class="section">
+        <div id="message-container0" class="message-container">
+            <div class="message">
+                <h1>Smoking &amp; Lung Cancer Insights for Anti-Smoking Organizations</h1>
+                <p id="authors">By: Jennifer Cao, Kuan-Lin (Luke) Kuo, &amp; Chieh-An (Andy) Chang</p>
             </div>
-            <div class="col-md-6">
+        </div>
+    </div>
+
+    <div id="section1" class="section">
+        <div id="message-container1" class="message-container">
+            <div class="message">
+                <p>Is your organization advocating for and working towards helping smokers to quit smoking?</p>
+                <p>Explore these insights to discover effective ways to encourage them to stop!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="section2" class="section">
+        <div id="message-container2" class="message-container">
+            <div class="message">
+                <p>A series of data visualizations will be presented, each exploring a specific question, followed by a discussion of the insights gained from each visualization.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="section3" class="section">
+        <div class="row align-items-center">
+            <div class="col-md vis-message-container">
+                <div class="vis-message">
+                    <h2>How do smokers vs non-smokers compare at each lung cancer stage?</h2>
+                    <p>The visualization shows that there are more smokers than non-smokers with stage III and stage IV lung cancer. This suggests that smoking may be associated with being diagnosed with higher severity of lung cancer.</p>
+                </div>
+            </div>
+            <div class="col-md">
                 <h3 id="grouped-barchart-title">The Number of Patients at each Lung Cancer Stage</h3>
                 <div id="grouped-barchart-div"></div>
             </div>
         </div>
     </div>
 
-    <div class="section">
+    <div id="section4" class="section">
         <div class="row align-items-center">
-            <div class="col-md-6 vis-message">
-                <h2>What is the life expectancy of someone with lung cancer?</h2>
-                <p>insert insights here</p>
+            <div class="col-md vis-message-container">
+                <div class="vis-message">
+                    <h2>What is the life expectancy of someone with lung cancer?</h2>
+                    <p>insert insights here</p>
+                </div>
             </div>
-            <div class="col-md-6">
-                <p class="align-self-center">
-                    <select id='categorySelector' class="custom-select align-self-center" onchange="categoryChange()">
-                        <option value="all" selected>All</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </p>
-                <div id="vis2"> </div>
+            <div class="col-md">
+                <select id="categorySelector" class="form-control custom-select align-self-center" onchange="categoryChange()">
+                    <option value="all" selected>All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <div id="vis2"></div>
                 <div id="visBrush"></div>
             </div>
         </div>
     </div>
 
-    <div class="section">
+    <div id="section5" class="section">
         <div class="container-fluid">
             <div id="innovative-container" class="row">
-                <div class="col-md-3 vis-message">
-                    <h2>How do smokers vs non-smokers compare at each lung cancer stage? What is their mortality risk at each stage?</h2>
-                    <p>
-                        The visualization shows that most smokers with lung cancer are at stage III and stage IV, while most non-smokers with lung cancer are at stage I and stage II.
-                        The visualization also shows that mortality risk increases as lung cancer stage increases, with smokers having a higher mortality risk than non-smokers at each stage.
-                        These insights suggest that smoking may be associated with not only being diagnosed at more advanced lung cancer stages, but also being more at risk of mortality at each stage than non-smokers.
-                    </p>
+                <div class="col-md-4 vis-message-container">
+                    <div class="vis-message">
+                        <h2>How do smokers vs. non-smokers compare at each lung cancer stage? What is their mortality risk at each stage?</h2>
+                        <p>
+                            The visualization shows that most smokers with lung cancer are at stage III and stage IV, while most non-smokers with lung cancer are at stage I and stage II.
+                            The visualization also shows that mortality risk increases as lung cancer stage increases, with smokers having a higher mortality risk than non-smokers at each stage.
+                            These insights suggest that smoking may be associated with not only being diagnosed at more advanced lung cancer stages, but also being more at risk of mortality at each stage than non-smokers.
+                        </p>
+                    </div>
                 </div>
                 <div class="col-md-7">
                     <h3 id="innovative-title">Number of Smokers vs. Non-Smokers at each Lung Cancer Stage and their Average Mortality Risk</h3>
@@ -83,8 +93,8 @@
         </div>
     </div>
 
-    <div class="section">
-        <div class="row">
+    <div id="section6" class="section">
+        <div id="message-container6" class="message-container">
             <div class="message">
                 <p>Overall, the main message to take away from these visualizations is:</p>
                 <p id="main-message">Smokers should quit smoking to lower their risk of developing lung cancer and to prevent their condition from worsening.</p>
@@ -92,41 +102,45 @@
         </div>
     </div>
 
-    <div class="section">
-        <div class="row">
+    <div id="section7" class="section">
+        <div id="message-container7" class="message-container">
             <div class="message">
                 <p>Before presenting some resources that you can recommend to smokers to help them to quit smoking, here are some additional visualizations with interesting insights.</p>
             </div>
         </div>
     </div>
 
-    <div class="section">
+    <div id="section8" class="section">
         <div class="row align-items-center">
-            <div class="col-md-6 vis-message">
-                <h2>How many people with lung cancer still continue to smoke?</h2>
-                <p>insert insights here</p>
+            <div class="col-md vis-message-container">
+                <div class="vis-message">
+                    <h2>How many people with lung cancer still continue to smoke?</h2>
+                    <p>insert insights here</p>
+                </div>
             </div>
-            <div class="col-md-6" style="height: 100%; max-height: 400px;">
+            <div class="col-md" style="height: 100%; max-height: 400px;">
                 <div id="vis1" class="text-center">
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="section">
+    <div id="section9" class="section">
         <div class="row align-items-center">
-            <div class="col-md-6 vis-message">
-                <h2>How does second hand smoke exposure impact the risk of lung cancer in non-smokers?</h2>
-                <p>insert insights here</p>
+            <div class="col-md vis-message-container">
+                <div class="vis-message">
+                    <h2>How does second hand smoke exposure impact the risk of lung cancer in non-smokers?</h2>
+                    <p>insert insights here</p>
+                </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md">
                 <div id="barchart-secondhand" class="text-center" style="width:100%; height:50vh;"></div>
             </div>
         </div>
     </div>
 
-    <div class="section">
-        <div class="row">
+    <div id="section10" class="section">
+        <div id="message-container10" class="message-container">
             <div class="message">
                 <h2>Resources to Help Smokers Quit Smoking</h2>
                 <ul>
@@ -139,9 +153,9 @@
         </div>
     </div>
 
-    <div class="section">
-        <div class="row">
-            <div class="message">
+    <div id="section11" class="section">
+        <div id="message-container11" class="message-container">
+            <div id="message11" class="message">
                 <h2>References</h2>
                 <ul>
                     <li>Ankit. (2025). Lung Cancer Risk & Prediction Dataset [Data set]. Kaggle. <a href="https://doi.org/10.34740/KAGGLE/DSV/10723076">https://doi.org/10.34740/KAGGLE/DSV/10723076</a></li>
@@ -183,7 +197,6 @@
         //options here
         autoScrolling: true,
         fitToSection: true,
-        scrollHorizontally: true,
         navigation: true,
         scrollingSpeed: 1000,
     });
