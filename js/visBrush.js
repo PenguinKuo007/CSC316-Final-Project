@@ -11,11 +11,10 @@ class VisBrush {
         let vis = this;
 
         vis.margin = { top: 20, right: 50, bottom: 50, left: 60  };
-        const container = document.getElementById(vis.parentElement);
-        vis.width = 600 - vis.margin.left - vis.margin.right;
-        vis.height = 200- vis.margin.top - vis.margin.bottom;
+        const size = document.getElementById(vis.parentElement).getBoundingClientRect();
+        vis.width = size.width - vis.margin.left - vis.margin.right;
+        vis.height = size.height - vis.margin.top - vis.margin.bottom;
 
-        // Initialize drawing area with margins
         vis.svg = d3.select("#" + vis.parentElement)
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -34,13 +33,9 @@ class VisBrush {
         vis.yAxis = d3.axisLeft()
             .scale(vis.y);
 
-
-
-
         vis.agePath = vis.svg.append("path")
             .attr("class", "area area-age");
 
-        // Define the D3 path generator
         vis.area = d3.area()
             .x(function (d, index) { return vis.x(index); })
             .y0(vis.height)
@@ -96,15 +91,26 @@ class VisBrush {
     wrangleData() {
         let vis = this;
 
+        vis.selectedCategory =  document.getElementById('categorySelector').value;
 
         vis.data.forEach(d=>d.Age = +d.Age);
         vis.data.forEach(d => d.Survival_Months = +d.Survival_Months);
+
+        if (vis.selectedCategory === 'all') {
+            vis.filterData = vis.data;
+        }
+        if (vis.selectedCategory === 'male') {
+            vis.filterData = vis.data.filter(d => d.Gender === "Male");
+        }
+        if (vis.selectedCategory === 'female') {
+            vis.filterData = vis.data.filter(d => d.Gender === "Female");
+        }
 
         vis.ageCount =  d3.range(0,52).map(function(){
             return 0;
         });
 
-        vis.data.forEach(d=>vis.ageCount[d.Age - 29] += 1);
+        vis.filterData.forEach(d=>vis.ageCount[d.Age - 29] += 1);
 
         vis.updateVis();
     }

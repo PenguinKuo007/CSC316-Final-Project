@@ -7,8 +7,9 @@ class GroupedBarChart {
         this.displayData = [];
         this.displayStatuses = [];
 
-        this.smokingStatuses = ["Smoker", "Former Smoker", "Non-Smoker"];
+        this.smokingStatuses = ["Non-Smoker", "Former Smoker", "Smoker"];
         this.cancerStages = ["I", "II", "III", "IV"];
+        this.statusColours = ["#b0bfc9", "#a66249", "#ee5f2c"];
 
         this.filterStatus = ""; // Filter the smoking status
 
@@ -43,7 +44,7 @@ class GroupedBarChart {
 
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.smokingStatuses)
-            .range(d3.schemeTableau10.slice(0, vis.smokingStatuses.length));
+            .range(vis.statusColours);
       
         vis.yScale = d3.scaleLinear()
             .range([vis.height, 0]);
@@ -71,7 +72,7 @@ class GroupedBarChart {
         vis.svg.append("text") // y-axis label
             .attr("class", "label")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width / 2)
+            .attr("x", -vis.height / 2)
             .attr("y", -60)
             .text("Number of Patients");
         

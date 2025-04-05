@@ -2,7 +2,9 @@
 let innovativeVis,
     vis1,
     chart,
-    groupedBarChart;
+    groupedBarChart,
+    vis2,
+    visBrush;
 
 // Load data using promises
 let promises = [
@@ -19,7 +21,6 @@ Promise.all(promises)
     });
 
 function initMainPage(dataArray) {
-
     let eventHandler = {
         bind: (eventName, handler) => {
             document.body.addEventListener(eventName, handler);
@@ -38,13 +39,10 @@ function initMainPage(dataArray) {
     vis2 = new Vis2("vis2", dataArray[0]);
     visBrush = new VisBrush("visBrush", dataArray[0], eventHandler);
 
-
     eventHandler.bind("selectionChanged", function(event){
         let rangeStart = event.detail[0];
         let rangeEnd = event.detail[1];
 
         vis2.onSelectionChange(rangeStart, rangeEnd);
-
-
     });
 }
