@@ -11,18 +11,26 @@ class Vis2 {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 20, right: 50, bottom: 50, left: 60  };
+        vis.margin = { top: 50, right: 50, bottom: 50, left: 60  };
         const size = document.getElementById(vis.parentElement).getBoundingClientRect();
         vis.width = size.width - vis.margin.left - vis.margin.right;
         vis.height = size.height - vis.margin.top - vis.margin.bottom;
 
-        // Initialize drawing area with margins
         vis.svg = d3.select("#" + vis.parentElement)
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append("g")
             .attr("transform", `translate(${vis.margin.left},${vis.margin.top})`);
+
+        vis.title = vis.svg
+            .append("text")
+            .attr("class", "title")
+            .attr("x", vis.width / 2)
+            .attr("y", -35)
+            .attr("text-anchor", "middle")
+            .style("font-weight", "bold")
+            .text("Average Survival Month of People with Lung Cancer by Age");
 
         vis.x = d3.scaleLinear().range([0, vis.width]);
 

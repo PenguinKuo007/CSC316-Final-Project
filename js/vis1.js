@@ -8,11 +8,10 @@ class Vis1 {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 20, right: 20, bottom: 20, left: 20 };
+        vis.margin = { top: 50, right: 20, bottom: 20, left: 20 };
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
-        // Initialize drawing area with margins
         vis.svg = d3.select("#" + vis.parentElement)
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -20,11 +19,19 @@ class Vis1 {
             .append("g")
             .attr("transform", `translate(${vis.margin.left},${vis.margin.top})`);
 
-        // Create bar chart group without extra translation
+        vis.title = vis.svg
+            .append("text")
+            .attr("class", "title")
+            .attr("x", vis.width / 2)
+            .attr("y", -30)
+            .attr("text-anchor", "middle")
+            .style("font-weight", "bold")
+            .text("Smoking Status of People with Lung Cancer");
+
         vis.barChartGroup = vis.svg.append("g")
             .attr("class", "bar-chart")
 
-        // Create scales with appropriate ranges
+
         vis.xScale = d3.scaleBand()
             .range([0, vis.width])
             .padding(0.1);
@@ -67,11 +74,10 @@ class Vis1 {
     updateVis() {
         let vis = this;
 
-        // Update scales' domains
+
         vis.xScale.domain(vis.smokeStatus.map(d => d.type));
         vis.yScale.domain([0, d3.max(vis.smokeStatus, d => d.count)]);
 
-        // Append bars using scaleBand's bandwidth for width
         vis.barChartGroup.selectAll("rect")
             .data(vis.smokeStatus)
             .enter()
@@ -87,7 +93,6 @@ class Vis1 {
                 if (d.type === "Current Smoker") return "#ee5f2c";
             });
 
-        // Append text labels centered on each bar
         vis.barChartGroup.selectAll(".bar-text")
             .data(vis.smokeStatus)
             .enter()
@@ -98,7 +103,6 @@ class Vis1 {
             .attr("text-anchor", "middle")
             .text(d => d.count);
 
-        // Append x-axis at the bottom of the chart group
         vis.barChartGroup.append("g")
             .attr("class", "x-axis")
             .attr("transform", "translate(0," + vis.height + ")")
