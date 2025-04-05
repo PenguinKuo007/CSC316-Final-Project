@@ -120,7 +120,7 @@ class BarChart {
       
       vis.tooltip = d3.select("body")
         .append("div")
-        .attr("id", "grouped-barchart-tooltip");
+        .attr("id", "second-hand-smoker-tooltip");
   
       // Wrangle and render data
       vis.wrangleData();

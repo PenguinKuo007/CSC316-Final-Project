@@ -1,55 +1,72 @@
-# Project README
+# CSC316H1 Final Project - Secondhand Insights
 
-## Project Overview
+## Section 1: Project Overview
 
-This project aims to support organizations in raising awareness about the negative impacts of smoking and its association with lung cancer. Through data analysis and visualizations, we provide clear insights to help organizations effectively advocate against smoking.
+This project aims to support organizations in raising awareness about the negative impacts of smoking and its association with lung cancer. Through data analysis and visualizations, we provide clear insights to help organizations effectively advocate against smoking. The following links provide access to the project website and a brief description of the webpage via the video.
 
 ### Website and Screencast
 - **Project Website:** [Insert URL here]
 - **Screencast Video:** [Insert URL here]
 
-## Code Structure
+In the following sections, Section 2 will provide a brief overview of the code structure, Section 3 will list the primary libraries used, Section 4 will include references, and Section 5 will provide the author's information and contact details.
 
-### Own Code
-- **JavaScript** (`js/`)
-  - `barchart.js`: Custom implementation of a bar chart visualization.
+## Section 2: Code Structure
+
+### Section 2.a: HTML
+
+  - `index.html`: A HTML file hosting the story and visulization
+
+### Section 2.b: CSS (`css/`)
+  - `style.css`: TODO
+  - `grouped-barchart-styles.css`: TODO
+  - `innovative-vis-styles.css`: TODO
+  - `SecondHandSmokerVis.css`: Custom style for the Second-Hand smoker visulization(i.e `SecondHandSmokerVis.js`)
+
+### Section 2.c: JavaScript (`js/`)
+
+  - `main.js`: Initialize all the visulization and load the dataset.
   - `groupedBarChart.js`: Custom implementation of grouped bar charts.
-  - `innovativeVis.js`: Advanced visualization script developed for project-specific data representation.
-  - `main.js`: Central JS file that initializes visualizations.
+  
+  - `SmokingStatusVis.js`: Custom implementation of a bar chart visualization on smoking status.
+  
   - `SurvivalVis.js`: Custom implementation of area chart visualization on survival month.
   - `SurvivalBrushVis.js`: Custom interactive brushing feature for survival month area chart.
-  - `mokingStatusVis.js`: Custom implementation of a bar chart visualization on smoking status.
-  - `helper.js`: Utility functions used throughout the visualizations.
-
-- **CSS** (`css/`)
-  - `barchart.css`: Custom styles specific to bar chart visualizations.
-  - `grouped-barchart-styles.css`: Styles specific to grouped bar charts.
-  - `innovative-vis-styles.css`: Styles for the custom innovative visualization.
-  - `style.css`: General styles for the project website.
-
-- **HTML**
-  - `index.html`: Main HTML file hosting the visualizations and page structure.
-
-### Data
-- **Datasets** (`data/`)
-  - `lung_cancer_data.csv`: Source dataset for visualization and modeling.
-  - `lung_cancer_prediction.csv`: Results from prediction models used in visualizations.
   
+  - `innovativeVis.js`: TODO
 
-### Libraries 
-  - Bootstrap (v5.2.2): For responsive layout and built-in styling components.
-  - D3.js (v7): For creating data visualizations, along with:
-    - d3-scale-chromatic: For advanced color scales.
-    - d3-geo: For geographic projections and mapping.
-    - TopoJSON: For working with geographic data formats.
-    - fullPage.js (v4.0.35): For enabling smooth, full-page scrolling and navigation.
-
-### Other Assets
-- Images (`img/`): Background images used for visual appeal and user interface enhancement.
+  - `SecondHandSmokerVis.js`: Compares the number of people developing lung cancer between secondhand smokers and non-secondhand smokers, assuming no prior smoking history.
+  
+  - `helper.js`: TODO
 
 
+### Section 2.d: Data
 
-## Author:
+- **Datasets** (`data/`)
+  
+  - `lung_cancer_data.csv`:  A cleaned dataset related to lung cancer and smoking, used by `groupedBarChart.js`, `SmokingStatusVis`, `SurvivalVis.js` and `SurvivalBrushVis.js`
+  
+  - `lung_cancer_prediction.csv`:  A cleaned dataset related to lung cancer and smoking, used by `innovativeVis.js` and `SecondHandSmokerVis.js`
+
+### Section 2.e: Other Assets
+- Images (`img/`): Background images for each slide.
+
+
+## Section 3: Libraries  
+We utilized the following libraries during this project for visualization and formatting purposes:
+
+- **Bootstrap (v5.2.2)**: For responsive layouts and style.
+- **D3.js (v7)**: For creating interactive data visualizations, along with:
+  - **d3-scale-chromatic**: Provides advanced color scales.
+  - **d3-geo**: Supports geographic projections and mapping.
+  - **TopoJSON**: Enables working with geographic data formats.
+- **fullPage.js (v4.0.35)**: Allows smooth, full-page scrolling and navigation.
+
+
+
+## Section 4: Reference
+
+
+## Section 5: Author:
 | Name           | Email                          |
 |----------------|--------------------------------|
 | Jennifer Cao   | jenni.cao@mail.utoronto.ca     |
