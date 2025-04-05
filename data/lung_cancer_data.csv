@@ -1,7 +1,7 @@
 Patient_ID,Age,Gender,Smoking_History,Stage,Survival_Months
-Patient0000,68,Male,Current Smoker,Stage III,14
-Patient0001,58,Male,Never Smoked,Stage III,84
-Patient0002,44,Male,Former Smoker,Stage II,91
+Patient0000,58,Male,Never Smoked,Stage III,84
+Patient0001,44,Male,Former Smoker,Stage II,91
+Patient0002,68,Male,Current Smoker,Stage III,14
 Patient0003,72,Male,Current Smoker,Stage IV,11
 Patient0004,37,Female,Never Smoked,Stage I,20
 Patient0005,50,Male,Never Smoked,Stage II,103
