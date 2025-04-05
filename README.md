@@ -55,10 +55,7 @@ In the following sections, Section 2 will provide a brief overview of the code s
 We utilized the following libraries during this project for visualization and formatting purposes:
 
 - **Bootstrap (v5.2.2)**: For responsive layouts and style.
-- **D3.js (v7)**: For creating interactive data visualizations, along with:
-  - **d3-scale-chromatic**: Provides advanced color scales.
-  - **d3-geo**: Supports geographic projections and mapping.
-  - **TopoJSON**: Enables working with geographic data formats.
+- **D3.js (v7)**: For creating interactive data visualizations
 - **fullPage.js (v4.0.35)**: Allows smooth, full-page scrolling and navigation.
 
 
