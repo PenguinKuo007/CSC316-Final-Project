@@ -82,9 +82,9 @@ class Vis1 {
             .attr("width", vis.xScale.bandwidth())
             .attr("height", d => vis.height - vis.yScale(d.count))
             .attr("fill", d => {
-                if (d.type === "Never Smoked") return "blue";
-                if (d.type === "Former Smoker") return "red";
-                if (d.type === "Current Smoker") return "black";
+                if (d.type === "Never Smoked") return "#b0bfc9";
+                if (d.type === "Former Smoker") return "#a66249";
+                if (d.type === "Current Smoker") return "#ee5f2c";
             });
 
         // Append text labels centered on each bar
