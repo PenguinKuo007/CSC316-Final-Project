@@ -7,6 +7,7 @@ This project aims to support organizations in raising awareness about the negati
 ### Website and Video
 - **Project Website:** https://penguinkuo007.github.io/CSC316-Final-Project/
 - **Project screencast videos:** https://play.library.utoronto.ca/watch/ab32c2c02945c4eb332f7aadb5a02410
+
 In the following sections, Section 2 will provide a brief overview of the code structure, Section 3 will list the primary libraries used, Section 4 will include references, and Section 5 will provide the author's information and contact details.
 
 ## Section 2: Code Structure
