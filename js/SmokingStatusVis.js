@@ -114,7 +114,7 @@ class SmokingStatusVis {
                     .style("top", event.pageY + "px")
                     /* Andy change the following part: */
                     .html(`
-                            <h5>Distribution of stage <span style="color: ${vis.colorScale(d.smokingHistory)};">${d.smokingHistory}</span></h5>   
+                            <h5>Distribution of stage for <span style="color: ${vis.colorScale(d.smokingHistory)};">${d.smokingHistory}</span></h5>   
                             <br>
                             <p>Stage I : ${d.stageI} people or ${Math.round(d.stageI/d.totalCount * 100)}%</p>
                             <p>Stage II : ${d.stageII} people or ${Math.round(d.stageII/d.totalCount * 100)}%</p>
