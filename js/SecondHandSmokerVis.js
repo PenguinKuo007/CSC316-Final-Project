@@ -1,9 +1,10 @@
 class BarChart {
     constructor(parentElement, data) {
+
+        /*Initialize the parameter like what we did on the lab */
         this.parentElement = parentElement;
         this.data = data;
         this.displayData = data;
-
 
         // Initialize the chart
         this.initVis();
@@ -14,10 +15,13 @@ class BarChart {
         let vis = this;
 
 
+        /*Setup the margin */
         vis.margin = { top: 100, right: 120, bottom: 60, left: 60 };
+
         vis.width =
             document.getElementById(vis.parentElement).getBoundingClientRect().width
             - vis.margin.left - vis.margin.right;
+
         vis.height =
             document.getElementById(vis.parentElement).getBoundingClientRect().height
             - vis.margin.top - vis.margin.bottom;
