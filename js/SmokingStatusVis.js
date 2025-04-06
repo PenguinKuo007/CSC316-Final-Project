@@ -86,6 +86,11 @@ class SmokingStatusVis {
         vis.xScale.domain(vis.smokeStatus.map(d => d.smokingHistory));
         vis.yScale.domain([0, d3.max(vis.smokeStatus, d => d.totalCount)]);
 
+        /* Andy change the following part: */
+        vis.colorScale = d3.scaleOrdinal()
+            .domain(["Never Smoked", "Former Smoker", "Current Smoker"])
+            .range(["#b0bfc9", "#a66249", "#ee5f2c"]);
+
         vis.barChartGroup.selectAll("rect")
             .data(vis.smokeStatus)
             .enter()
@@ -95,11 +100,8 @@ class SmokingStatusVis {
             .attr("y", d => vis.yScale(d.totalCount))
             .attr("width", vis.xScale.bandwidth())
             .attr("height", d => vis.height - vis.yScale(d.totalCount))
-            .attr("fill", d => {
-                if (d.smokingHistory === "Never Smoked") return "#b0bfc9";
-                if (d.smokingHistory === "Former Smoker") return "#a66249";
-                if (d.smokingHistory === "Current Smoker") return "#ee5f2c";
-            })
+             /* Andy change the following part: */
+            .attr("fill", d => vis.colorScale(d.smokingHistory))          
             .on("mouseover", function(event, d) {
                 // Fade other bars if you like
                 vis.svg.selectAll(".bar").style("opacity", 0.4);
@@ -110,16 +112,17 @@ class SmokingStatusVis {
                     .style("opacity", 1)
                     .style("left", (event.pageX + 20) + "px")   // position near cursor
                     .style("top", event.pageY + "px")
+                    /* Andy change the following part: */
                     .html(`
-              <h5>Distribution of stage</h5>
-              <br>
-              <p>Stage I : ${d.stageI} people or ${Math.round(d.stageI/d.totalCount * 100)}%</p>
-              <p>Stage II : ${d.stageII} people or ${Math.round(d.stageII/d.totalCount * 100)}%</p>
-              <p>Stage III : ${d.stageIII} people or ${Math.round(d.stageIII/d.totalCount * 100)}%</p>
-              <p>Stage IV : ${d.stageIV} people or ${Math.round(d.stageIV/d.totalCount * 100)}%</p>
-              <br>
-              <p>Total: ${d.totalCount} people</p>
-            `);
+                            <h5>Distribution of stage <span style="color: ${vis.colorScale(d.smokingHistory)};">${d.smokingHistory}</span></h5>   
+                            <br>
+                            <p>Stage I : ${d.stageI} people or ${Math.round(d.stageI/d.totalCount * 100)}%</p>
+                            <p>Stage II : ${d.stageII} people or ${Math.round(d.stageII/d.totalCount * 100)}%</p>
+                            <p>Stage III : ${d.stageIII} people or ${Math.round(d.stageIII/d.totalCount * 100)}%</p>
+                            <p>Stage IV : ${d.stageIV} people or ${Math.round(d.stageIV/d.totalCount * 100)}%</p>
+                            <br>
+                            <p>Total: ${d.totalCount} people</p>
+                        `);
             })
             .on("mouseout", function() {
                 // Restore bars
