@@ -44,9 +44,15 @@ In the following sections, Section 2 will provide a brief overview of the code s
   
   - `lung_cancer_prediction.csv`:  A cleaned dataset related to lung cancer and smoking, used by `groupedBarChart.js`, `innovativeVis.js` and `SecondHandSmokerVis.js`.
 
-### Section 2.e: Other Assets [i.e., Images (`img/`)]
-
+### Section 2.e: Other Assets [i.e., Images (`img/`), Final Project Video(`Final Project Video/`), and Process book(`Process book/`)]
+  #### `img/`:
   - Each slide should have a background image named sequentially (e.g., background0.png, background1.png, etc.).
+
+  #### `Final Project Video/`
+  - A folder containing a video that describes the project.
+  
+  #### `Process Book/`
+  - A folder containing a process book that records what we did each week during development.
 
 ## Section 3: Libraries  
 We utilized the following libraries during this project for visualization and formatting purposes:
@@ -54,8 +60,6 @@ We utilized the following libraries during this project for visualization and fo
   - **Bootstrap (version.5.2.2)**: For responsive layouts and style.
   - **D3.js (v7)**: For creating interactive data visualizations.
   - **fullPage.js (version.4.0.35)**: Allows smooth, full-page scrolling and navigation.
-
-
 
 ## Section 4: References
 
