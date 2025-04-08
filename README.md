@@ -44,7 +44,7 @@ In the following sections, Section 2 will provide a brief overview of the code s
   
   - `lung_cancer_prediction.csv`:  A cleaned dataset related to lung cancer and smoking, used by `groupedBarChart.js`, `innovativeVis.js` and `SecondHandSmokerVis.js`.
 
-### Section 2.e: Other Assets [i.e., Images (`img/`), Final Project Video(`Final Project Video/`), and Process book(`Process book/`)]
+### Section 2.e: Other Assets [i.e., Images, Final Project Video, and Process book]
   #### `img/`:
   - Each slide should have a background image named sequentially (e.g., background0.png, background1.png, etc.).
 
