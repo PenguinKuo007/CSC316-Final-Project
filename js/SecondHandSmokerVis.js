@@ -46,7 +46,7 @@ class BarChart {
             .style("font-weight", "bold");
 
         /*
-          The following line break in the title section was generated with the help of ChatGPT.
+          The following line break in the title section was made by me and helped by ChatGPT for debug.
         */
 
         titleText
@@ -60,7 +60,7 @@ class BarChart {
             .attr("x", vis.width / 2)
             .attr("dy", "1.2em")
             .text("in Second-hand & non-second-hand smoker (without smoke)");
-        /* Above code was generated with the help of ChatGPT*/
+        /* ***************************************************************** */
 
         // Create the x and y axis scale
         vis.xScale = d3.scaleBand().range([0, vis.width]).padding(0.3);
@@ -106,7 +106,7 @@ class BarChart {
             .attr("transform", `translate(${vis.width - 150}, 0)`);
 
         /*
-          The following lines drawing the legend was generated with the help of ChatGPT.
+          The following lines drawing the legend was made by me and helped by ChatGPT for debug.
         */
         let categories = vis.color.domain();
         categories.forEach((cat, i) => {
@@ -124,7 +124,7 @@ class BarChart {
                 .attr("y", i * 20 + 12)
                 .text(`Second-Hand Smoke = ${cat}`);
         });
-        /* Above code was generated with the help of ChatGPT*/
+        /* ***************************************************************** */
 
         // Create the tooltip
         vis.tooltip = d3.select("body")
@@ -201,7 +201,7 @@ class BarChart {
             .attr("x", (d) => vis.xScale(d.secondHand))
             .attr("y", vis.height)
             .attr("width", vis.xScale.bandwidth())
-            .attr("height", 0)      // This is suggested by ChatGPT so that there is a smooth animation.
+            .attr("height", 0)   
             .attr("fill", (d) => vis.color(d.secondHand))
             .merge(bars)
             .on("mouseover", function(event, d) {
@@ -287,7 +287,7 @@ class BarChart {
 
 /* Citations:
   1. Most of the code was adjust from the previous couple homework and lab.
-  2.  I also use chatgpt to generate some of the code for the title and legend where
-      I was not sure how to write the code. But, I understood them after the code was generated.
-  3. I use the chatGPT to help me debug
+  2.  I also use chatgpt to debug some of the code for the title and legend where
+      I intitially had some bugs and chatgpt help me to fix it. But, I understood them after the code was adjusted.
+  3. I use the chatGPT to help me debug in general
 */
