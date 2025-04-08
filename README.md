@@ -17,22 +17,21 @@ In the following sections, Section 2 will provide a brief overview of the code s
   - `index.html`: A HTML file hosting the story and visualizations.
 
 ### Section 2.b: CSS (`css/`)
-  - `style.css`: General styles and styles for the visualizations.
-  - `grouped-barchart-styles.css`: Styles for the grouped bar chart.
-  - `innovative-vis-styles.css`: Styles for the innovative visualization.
-  - `SecondHandSmokerVis.css`: Custom style for the Second-Hand smoker visulization (i.e `SecondHandSmokerVis.js`).
+  - `style.css`: General styles and styles for the visualizations.  
+  - `grouped-barchart-styles.css`: Styles for the grouped bar chart and other bar chart visualizations (i.e., `groupedBarChart.js`, `SmokingStatusVis.js`, `SecondHandSmokerVis.js`).  
+  - `innovative-vis-styles.css`: Styles for the innovative visualization (i.e., `innovativeVis.js`).
 
 ### Section 2.c: JavaScript (`js/`)
 
-  - `main.js`: Initialize all the visualizations and load the datasets.
+  - `main.js`: Initializes all visualizations and loads the datasets.
   - `groupedBarChart.js`: Custom implementation of a grouped bar chart.
-  
-  - `SmokingStatusVis.js`: Custom implementation of a bar chart visualization on smoking status.
-  
+      
   - `SurvivalVis.js`: Custom implementation of area chart visualization on survival month.
   - `SurvivalBrushVis.js`: Custom interactive brushing feature for survival month area chart.
   
   - `innovativeVis.js`: Custom implementation of the innovative visualization.
+
+  - `SmokingStatusVis.js`: Custom implementation of a bar chart visualization on smoking status.
 
   - `SecondHandSmokerVis.js`: Compares the number of people developing lung cancer between secondhand smokers and non-secondhand smokers, assuming no prior smoking history.
   
